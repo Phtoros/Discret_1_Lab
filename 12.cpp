@@ -69,7 +69,7 @@ void func()
         cout << setw(3) << f1(x, y, z);
         cout << setw(3) << f2(x, y, z) << endl;
         if (f1(x, y, z) != f2(x, y, z)) {
-            cout << " - на данной строчке функции не могут быть эквивалентными" << endl;
+            cout << " - функции не эквивалентны!" << endl;
             break;
         }
         else {
