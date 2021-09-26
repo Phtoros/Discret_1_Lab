@@ -216,6 +216,7 @@ string P_J() {
         }
 cout << s << endl;
 c = c.substr(0, c.size() - 2);
+    cout << c << endl;
 return c;
     }
 
