@@ -1,0 +1,127 @@
+#include <iostream>
+#include <math.h>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+bool eqv(bool a, bool b)
+{
+    return (!(a ^ b));
+}//эквивалентность <->
+bool imp(bool a, bool b)
+{
+    return (!a || b);
+}//импликация ->
+bool aimp(bool a, bool b)
+{
+    return (!(!a || b));
+}//антиимпликация !->
+bool pl(bool a, bool b)
+{
+    return ((a+b)%2);
+}//сложение по модулю 2
+bool adiz(bool a, bool b)
+{
+    return (!(a || b));
+}//антидизъюнкция
+bool akon(bool a, bool b)
+{
+    return (!(a && b));
+}//антиконъюнкция
+bool f1(bool x, bool y, bool z)
+{
+    bool l = eqv((imp(!z,x)),(akon(!x,y))); //первая функция
+    return l;
+}
+
+void func()
+{
+    setlocale(LC_ALL, "Russian");
+    string SKNF, SDNF;
+    SDNF = "(";
+    SKNF = "(";
+    bool x, y, z, fun;
+    cout << setw(3) << "x" << setw(3) << "y" << setw(3) << "z";
+    cout << setw(3) << "f1" << setw(3) << endl;
+    for (int i = 0; i < 8; i++) {
+        if (i < 4) {
+            x = 0;
+        }
+        else {
+            x = 1;
+        }
+        if ((i <= 1) || (i == 4) || (i == 5)) {
+            y = 0;
+        }
+        else {
+            y = 1;
+        }
+        if (i % 2) {
+            z = 1;
+        }
+        else {
+            z = 0;
+        }
+        cout << setw(3) << x << setw(3) << y << setw(3) << z << setw(3);
+        cout << setw(3) << f1(x, y, z) << endl;
+        fun = f1(x, y, z);
+        if (fun == 0) {
+            if (x == 0) {
+                SKNF = SKNF + "x+";
+            }
+            else {
+                SKNF = SKNF + "!x+";
+            }
+            if (y == 0) {
+                SKNF = SKNF + "y";
+            }
+            else {
+                SKNF = SKNF + "!y";
+            }
+            if (z == 0) {
+                SKNF = SKNF + "+z";
+            }
+            else {
+                SKNF = SKNF + "+!z";
+            }
+            SKNF = SKNF + ")+(";
+
+        }
+        
+    if (fun == 1) {
+        
+        if (x == 1) {
+            SDNF = SDNF + "x";
+        }
+        else {
+            SDNF = SDNF + "!x";
+        }
+        if (y == 1) {
+            SDNF = SDNF + "y";
+        }
+        else {
+            SDNF = SDNF + "!y";
+        }
+        if (z == 1) {
+            SDNF = SDNF + "z";
+        }
+        else {
+            SDNF = SDNF + "!z";
+        }
+        
+        SDNF = SDNF + ")+(";
+
+    }
+    
+    }
+SDNF = SDNF.substr(0, SDNF.size() - 2);
+SKNF = SKNF.substr(0, SKNF.size() - 2);
+cout << "SDNF: " << SDNF << endl << "SKNF: " << SKNF << endl;
+}
+
+int main()
+{
+    func();
+    return 0;
+}
